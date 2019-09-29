@@ -9,8 +9,18 @@ import (
 func main() {
 	r := gin.Default()
 	indexRouter := router.IndexRouter{}
+	tasksRouter := router.TasksRouter{}
 
 	r.GET("/", indexRouter.Index)
+
+	tasks := r.Group("/tasks")
+	{
+		tasks.GET("", tasksRouter.Index)
+		tasks.POST("", tasksRouter.Create)
+		tasks.GET("/:id", tasksRouter.Read)
+		tasks.POST("/:id", tasksRouter.Update)
+		tasks.DELETE("/:id", tasksRouter.Delete)
+	}
 
 	r.Run()
 }
