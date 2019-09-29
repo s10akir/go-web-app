@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 
+	"github.com/s10akir/go-web-app/src/models"
 	"github.com/s10akir/go-web-app/src/router"
 )
 
@@ -10,6 +11,8 @@ func main() {
 	r := gin.Default()
 	indexRouter := router.IndexRouter{}
 	tasksRouter := router.TasksRouter{}
+
+	models.Init()
 
 	r.GET("/", indexRouter.Index)
 
