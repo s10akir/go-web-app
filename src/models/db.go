@@ -10,5 +10,8 @@ func Init() {
 	if err != nil {
 		panic(err)
 	}
+
+	db.AutoMigrate(&Task{})
+
 	defer db.Close()
 }
