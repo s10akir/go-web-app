@@ -5,13 +5,20 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
+var db, err = gorm.Open("sqlite3", "/tmp/go-web-app.sqlite3")
+
 func Init() {
-	db, err := gorm.Open("sqlite3", "/tmp/go-web-app.sqlite3")
 	if err != nil {
 		panic(err)
 	}
 
 	db.AutoMigrate(&Task{})
+}
 
-	defer db.Close()
+func GetDB() *gorm.DB {
+	return db
+}
+
+func CloseDB() {
+	db.Close()
 }
